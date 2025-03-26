@@ -1,0 +1,73 @@
+.body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 5rem;
+  padding: 1rem 2rem;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -1px;
+  border-top: 0.5px rgb(150, 149, 149) solid;
+  border-bottom: 0.5px rgba(206, 205, 205, 0.712) solid;
+}
+.searchInput {
+  width: 35rem;
+  padding: 0.7rem 1rem;
+  background-color: #f8f8f8;
+  border: 0.5px rgba(206, 205, 205, 0.712) solid;
+  outline: none;
+  font-size: 1.8rem;
+  border-radius: 5px;
+  border-radius: 1rem;
+}
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 5rem;
+  padding-right: 5rem;
+}
+.login {
+  font-size: 1.8rem;
+  color: rgb(18, 18, 18);
+  cursor: pointer;
+  font-weight: 300;
+}
+.searchInput::placeholder {
+  font-size: 1.3rem;
+  font-style: italic;
+  color: rgba(150, 149, 149, 0.5);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.delivery {
+  font-size: 1.6rem;
+  color: #212121;
+}
+.location {
+  border: none;
+}
+.cart {
+  background-color: #0c831f;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+}
+.logo {
+  height: 38px;
+  position: relative;
+}
+.logoDiv {
+  display: flex;
+  align-items: center;
+}
+.logoLine {
+  height: 20vh;
+  width: 1px;
+  margin-left: 2rem;
+  background-color: rgba(206, 205, 205, 0.712);
+}
