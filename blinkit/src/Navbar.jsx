@@ -34,7 +34,13 @@ const Navbar = () => {
       </div>
       <div>
         <h2 className={styles.delivery}>Delivery in 0 minutes</h2>
-        <span>Loni, Ghaziabad, Uttar Pradesh</span>
+        <span
+          style={{
+            color: "black",
+          }}
+        >
+          Loni, Ghaziabad, Uttar Pradesh
+        </span>
         <select className={styles.location}>
           <option value="" disabled selected>
             Choose a location
