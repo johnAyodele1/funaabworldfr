@@ -1,9 +1,12 @@
 import blinkit from "/logo.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
-
+import Login from "./Login";
 const Navbar = () => {
   const [placeholder, setPlaceholder] = useState("Search");
+  const overlay = useRef(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     const displayItems = [
       "egg",
@@ -26,8 +29,41 @@ const Navbar = () => {
 
     return () => clearInterval(interval);
   }, []);
+  useEffect(() => {
+    // const overlay = document.querySelector("._overlay_sqgjf_103");
+    const login = document.querySelector("._login_sqgjf_69");
+    if (!overlay) return; // Ensure overlay exists
+    if (isLoggedIn) {
+      overlay.style.display = "none";
+    }
+
+    const closeOverlay = () => {
+      overlay.current.style.display = "none";
+    };
+    const toogleOverlay = () => {
+      setIsLoggedIn(false);
+      if (overlay.current) {
+        overlay.current.style.display = "none"; // Temporarily hide
+        setTimeout(() => {
+          overlay.current.style.display = "block"; // Then show
+        }, 10); // A slight delay forces repaint
+      }
+      // Correct function definition
+    };
+
+    login.addEventListener("click", toogleOverlay);
+    window.addEventListener("click", closeOverlay);
+
+    return () => {
+      window.removeEventListener("click", closeOverlay); // Cleanup
+    };
+  }, []);
   return (
     <div className={styles.body}>
+      <div ref={overlay} className={styles.overlay}>
+        <Login />
+      </div>
+
       <div className={styles.logoDiv}>
         <img className={styles.logo} src={blinkit} alt="BlinkIt logo" />
         <div className={styles.logoLine}></div>

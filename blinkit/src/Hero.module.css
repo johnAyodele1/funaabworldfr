@@ -93,13 +93,16 @@
   padding: 1rem;
 }
 .templateO {
+  color: rgba(0, 0, 0, 0.753);
   padding-top: 1.3rem;
   padding-left: 1rem;
   height: 30vh;
   width: 21vw;
   border-radius: 1rem;
-  background-color: rgba(4, 163, 163, 0.829);
+  background-color: rgb(240, 173, 49);
+  position: relative;
 }
+
 .templateO h2 {
   margin: 0%;
   line-height: 1.3;
@@ -122,8 +125,8 @@
   font-size: 1.2rem;
 
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: black;
-  background-color: #fff;
+  color: #fff;
+  background-color: black;
   font-weight: 600;
   border: none;
   width: 9rem;
@@ -132,12 +135,22 @@
   padding: 1rem;
 }
 .templateW {
+  color: rgba(0, 0, 0, 0.644);
   padding-top: 1.3rem;
   padding-left: 1rem;
   height: 30vh;
   width: 21vw;
   border-radius: 1rem;
-  background-color: rgba(4, 163, 163, 0.829);
+  position: relative;
+  background-color: rgba(219, 219, 219, 0.671);
+}
+.image2 {
+  right: 5%;
+  top: 30%;
+  position: absolute;
+  border-radius: 5%;
+  width: 50%;
+  /* height: 60%; */
 }
 .templateW h2 {
   margin: 0%;
@@ -161,8 +174,8 @@
   font-size: 1.2rem;
 
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: black;
-  background-color: #fff;
+  color: #fff;
+  background-color: black;
   font-weight: 600;
   border: none;
   width: 9rem;
