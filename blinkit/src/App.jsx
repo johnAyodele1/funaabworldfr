@@ -3,6 +3,9 @@ import Navbar from "./Navbar";
 import Hero from "./Hero";
 import Loader from "./Loader";
 import { useState, useEffect } from "react";
+import Products from "./Products";
+import ProductSec from "./ProductSec";
+
 const App = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -18,6 +21,8 @@ const App = () => {
         <div>
           <Navbar />
           <Hero />
+          <Products />
+          <ProductSec />
         </div>
       )}
     </div>

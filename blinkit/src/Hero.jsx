@@ -2,9 +2,10 @@ import React from "react";
 import styles from "./Hero.module.css";
 import image from "./assets/toppng.com-canned-food-618x400.png";
 import image2 from "./assets/zoshua-colah-ioOxl44C3Wc-unsplash.jpg";
+import { motion } from "framer-motion";
 const Hero = () => {
   return (
-    <div className={styles.hero}>
+    <motion.div>
       <div className={styles.paan}>
         <h1 className={styles.h1}>Paan corner</h1>
         <p>Your favourite paan shop is now online</p>
@@ -42,7 +43,7 @@ const Hero = () => {
           <button>Order Now</button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

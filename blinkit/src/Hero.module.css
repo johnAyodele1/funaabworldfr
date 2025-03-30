@@ -59,6 +59,7 @@
   height: 30vh;
   width: 21vw;
   border-radius: 1rem;
+  padding-bottom: 1.3rem;
   background-color: rgba(4, 163, 163, 0.829);
 }
 .templateB h2 {
@@ -96,6 +97,7 @@
   color: rgba(0, 0, 0, 0.753);
   padding-top: 1.3rem;
   padding-left: 1rem;
+  padding-bottom: 1.3rem;
   height: 30vh;
   width: 21vw;
   border-radius: 1rem;
@@ -138,6 +140,7 @@
   color: rgba(0, 0, 0, 0.644);
   padding-top: 1.3rem;
   padding-left: 1rem;
+  padding-bottom: 1.3rem;
   height: 30vh;
   width: 21vw;
   border-radius: 1rem;
