@@ -59,7 +59,7 @@ const ProductSec = () => {
               name: "Amul Gold Full Cream Fresh Milk",
               price: "$25",
               size: "500ml",
-              time: "30min",
+              time: "30 MIN",
             },
             {
               image: image2,
@@ -67,7 +67,7 @@ const ProductSec = () => {
               name: "Amul Salted Butter",
               price: "$30",
               size: "300ml",
-              time: "45min",
+              time: "45 MIN",
             },
             {
               image: image0,
@@ -75,7 +75,7 @@ const ProductSec = () => {
               name: "Amul Blend Diced Cheese",
               price: "$20",
               size: "200ml",
-              time: "60min",
+              time: "60 MIN",
             },
             {
               image: image4,
@@ -83,7 +83,7 @@ const ProductSec = () => {
               name: "Harvest Gold - White Bread",
               price: "$28",
               size: "100ml",
-              time: "15min",
+              time: "15 MIN",
             },
             {
               image: image5,
@@ -91,7 +91,7 @@ const ProductSec = () => {
               name: "Amul Taaza Toned Fresh Milk",
               price: "$22",
               size: "500ml",
-              time: "30min",
+              time: "30 MIN",
             },
             {
               image: image6,
@@ -99,7 +99,7 @@ const ProductSec = () => {
               name: "Mother Dairy Full Cream Fresh Milk",
               price: "$28",
               size: "540ml",
-              time: "23min",
+              time: "23 MIN",
             },
           ].map((product) => (
             <Product

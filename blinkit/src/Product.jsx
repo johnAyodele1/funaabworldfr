@@ -9,10 +9,10 @@ const Card = styled.div`
   box-shadow: 1px 1px 1px rgba (0, 0, 0, 0.1);
   background: white;
   text-align: center;
-  height: 16rem;
+  height: 18rem;
   display: grid;
-  grid-template-rows: 1fr 2fr;
-  //   overflow: hidden;
+  grid-template-rows: 1fr 1fr;
+  overflow: hidden;
 `;
 
 const ProductImage = styled.img`
@@ -38,6 +38,8 @@ const ProductName = styled.div`
   font-weight: bold;
   margin-top: 0.5rem;
   font-size: 0.875rem;
+  color: black;
+  opacity: 90%;
 `;
 
 const ProductSize = styled.div`
@@ -45,12 +47,14 @@ const ProductSize = styled.div`
   font-size: 0.75rem;
 `;
 const ProductDiv = styled.div`
-  color: #555;
-  font-size: 0.75rem;
+  overflow: hidden;
+  padding: 0.5rem;
 `;
 
 const Price = styled.div`
-  overflow: hidden;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
 `;
 
 const AddButton = styled.button`
@@ -69,16 +73,21 @@ const AddButton = styled.button`
   cursor: pointer;
   border-radius: 0.375rem;
   margin-top: 0.5rem;
-  &:hover {
-    background-color: #45a049;
-  }
 `;
 
 const Product = (props) => {
   return (
     <Card>
       <ProductDiv>
-        <ProductImage src={props.image} alt="Product" />
+        <ProductImage
+          src={props.image}
+          alt="Product"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
       </ProductDiv>
       <div>
         <DeliveryTime>{props.time}</DeliveryTime>
