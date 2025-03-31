@@ -5,7 +5,7 @@ import Loader from "./Loader";
 import { useState, useEffect } from "react";
 import Products from "./Products";
 import ProductSec from "./ProductSec";
-
+import "./App.css";
 const App = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -14,7 +14,7 @@ const App = () => {
     }, 3000);
   }, []);
   return (
-    <div>
+    <div className="appBody">
       {loading ? (
         <Loader />
       ) : (
