@@ -17,17 +17,23 @@ const Card = styled.div`
 
 const ProductImage = styled.img`
   width: 100%;
+  height: 7rem;
   border-radius: 0.5rem;
 `;
 
 const DeliveryTime = styled.div`
-  color: green;
-  font-size: 0.75rem;
+  color: black;
+  opacity: 85%;
+  font-size: 0.7rem;
+  word-spacing: -1px;
   font-weight: bold;
   display: flex;
+  width: 4rem;
+  border-radius: 1.25rem;
+  background-color: rgb(234, 238, 235);
   align-items: center;
-  justify-content: center;
-  margin-top: 0.5rem;
+  justify-content: flex-start;
+  margin-top: 1rem;
   &::before {
     content: "⏳";
     margin-right: 0.3rem;
@@ -35,16 +41,26 @@ const DeliveryTime = styled.div`
 `;
 
 const ProductName = styled.div`
-  font-weight: bold;
+  font-weight: 600;
   margin-top: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
+  height: 3rem;
   color: black;
-  opacity: 90%;
+  opacity: 85%;
+  width: 10rem;
+  text-align: start;
 `;
 
 const ProductSize = styled.div`
+  font-weight: 400;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: black;
+  opacity: 85%;
+  width: 10rem;
+  text-align: start;
   color: #555;
-  font-size: 0.75rem;
 `;
 const ProductDiv = styled.div`
   overflow: hidden;
@@ -54,7 +70,9 @@ const ProductDiv = styled.div`
 const Price = styled.div`
   font-size: 1rem;
   font-weight: bold;
+  opacity: 85%;
   margin-top: 0.5rem;
+  color: black;
 `;
 
 const AddButton = styled.button`
@@ -92,9 +110,21 @@ const Product = (props) => {
       <div>
         <DeliveryTime>{props.time}</DeliveryTime>
         <ProductName>{props.name}</ProductName>
+
         <ProductSize>{props.size}</ProductSize>
-        <Price>{props.price}</Price>
-        <AddButton>ADD</AddButton>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+            marginTop: "0.5rem",
+            marginBottom: "0.5rem",
+          }}
+        >
+          <Price>{props.price}</Price>
+          <AddButton>ADD</AddButton>
+        </div>
       </div>
     </Card>
   );
