@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Products from "./Products";
 import ProductSec from "./ProductSec";
 import "./App.css";
+import Footer from "./Footer";
 const App = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -23,6 +24,7 @@ const App = () => {
           <Hero />
           <Products />
           <ProductSec />
+          <Footer />
         </div>
       )}
     </div>
