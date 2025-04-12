@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -94,6 +95,11 @@ const AddButton = styled.button`
 `;
 
 const Product = (props) => {
+  const [cart, setCart] = useState([]);
+  const cartItem = function () {
+    setCart((prev) => prev + 1);
+  };
+
   return (
     <Card>
       <ProductDiv>
@@ -123,7 +129,7 @@ const Product = (props) => {
           }}
         >
           <Price>{props.price}</Price>
-          <AddButton>ADD</AddButton>
+          <AddButton onClick={cartItem}>ADD</AddButton>
         </div>
       </div>
     </Card>

@@ -1,14 +1,41 @@
 import React from "react";
 import styled from "styled-components";
 import styles from "./Login.module.css";
+import { useState, useEffect, useRef } from "react";
+const Form = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const overlay = document.querySelector("._overlay_4r1zq_105");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({ email, password });
+    fetch("http://127.0.0.1:3000/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => res.json())
+      .then((msg) => {
+        console.log(msg);
+        console.log(msg.status);
+        if (msg.status == "success") {
+          alert("Login Successful");
+          overlay.style.display = "none";
+          document.querySelector("._login_4r1zq_71").textContent =
+            msg.user.name;
+        } else alert("Invalid Email or Password");
+      });
+  };
 
-const Form = () => {
   return (
     <div className={styles.form}>
       <StyledWrapper>
-        <form className="form">
+        <form onSubmit={handleSubmit} className="form">
           <div className="flex-column">
             <label>Email </label>
+            <button className="closeBtn">X</button>
           </div>
           <div className="inputForm">
             <svg
@@ -22,6 +49,9 @@ const Form = () => {
               </g>
             </svg>
             <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
               placeholder="Enter your Email"
               className="input"
               type="text"
@@ -41,9 +71,12 @@ const Form = () => {
               <path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0" />
             </svg>
             <input
+              id="password"
               placeholder="Enter your Password"
               className="input"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="flex-row">
@@ -53,9 +86,14 @@ const Form = () => {
             </div>
             <span className="span">Forgot password?</span>
           </div>
-          <button className="button-submit">Sign In</button>
+          <button type="submit" className="button-submit">
+            Sign In
+          </button>
           <p className="p">
-            Don't have an account? <span className="span">Sign Up</span>
+            Don't have an account?{" "}
+            <span className="span" onClick={props.toggle}>
+              Sign Up
+            </span>
           </p>
           <p className="p line">Or With</p>
           <div className="flex-row">
@@ -153,7 +191,21 @@ const StyledWrapper = styled.div`
   .form button {
     align-self: flex-end;
   }
-
+  .flex-column {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .flex-column > button {
+    cursor: pointer;
+    background-color: #151717;
+    color: #ecedec;
+    height: 2rem;
+    width: 3rem;
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
   .flex-column > label {
     color: #151717;
     font-weight: 600;

@@ -1,12 +1,14 @@
 import React from "react";
-import Navbar from "./Navbar";
-import Hero from "./Hero";
+
 import Loader from "./Loader";
 import { useState, useEffect } from "react";
-import Products from "./Products";
-import ProductSec from "./ProductSec";
+
 import "./App.css";
-import Footer from "./Footer";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import AddProduct from "./AddProduct";
+
 const App = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -15,19 +17,18 @@ const App = () => {
     }, 3000);
   }, []);
   return (
-    <div className="appBody">
-      {loading ? (
-        <Loader />
-      ) : (
-        <div>
-          <Navbar />
-          <Hero />
-          <Products />
-          <ProductSec />
-          <Footer />
-        </div>
-      )}
-    </div>
+    <Router>
+      <div className="appBody">
+        {loading ? (
+          <Loader />
+        ) : (
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/addproduct" element={<AddProduct />} />
+          </Routes>
+        )}
+      </div>
+    </Router>
   );
 };
 

@@ -1,9 +1,17 @@
 import blinkit from "/logo.svg";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Login";
+import Signup from "./Signup";
+import Cart from "./Cart";
 const Navbar = () => {
+  const overlayCart = document.querySelector("._mainDiv_1edos_1");
+  const openOverlay = () => {
+    overlayCart.style.display = "grid";
+  };
   const [placeholder, setPlaceholder] = useState("Search");
+  const [login, setLogin] = useState(false);
   const overlay = useRef(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -29,9 +37,16 @@ const Navbar = () => {
 
     return () => clearInterval(interval);
   }, []);
+  const toggleLogIn = () => {
+    setLogin(true);
+  };
+  const toggleSignIn = () => {
+    setLogin(false);
+  };
   useEffect(() => {
     // const overlay = document.querySelector("._overlay_sqgjf_103");
-    const login = document.querySelector("._login_sqgjf_69");
+    const login = document.querySelector("._login_4r1zq_71");
+    const closeBtn = document.querySelector(".closeBtn");
     if (!overlay) return; // Ensure overlay exists
     if (isLoggedIn) {
       overlay.style.display = "none";
@@ -52,16 +67,21 @@ const Navbar = () => {
     };
 
     login.addEventListener("click", toogleOverlay);
-    window.addEventListener("click", closeOverlay);
+    closeBtn.addEventListener("click", closeOverlay);
 
     return () => {
-      window.removeEventListener("click", closeOverlay); // Cleanup
+      login.removeEventListener("click", toogleOverlay);
+      closeBtn.removeEventListener("click", closeOverlay); // Cleanup
     };
   }, []);
   return (
     <div className={styles.body}>
       <div ref={overlay} className={styles.overlay}>
-        <Login />
+        {login ? (
+          <Login toggle={toggleSignIn} />
+        ) : (
+          <Signup toggle={toggleLogIn} />
+        )}
       </div>
 
       <div className={styles.logoDiv}>
@@ -97,8 +117,11 @@ const Navbar = () => {
         <a href="#" className={styles.login}>
           Login
         </a>
-        <button className={styles.cart}>My cart</button>
+        <button className={styles.cart} onClick={openOverlay}>
+          My cart
+        </button>
       </div>
+      <Cart />
     </div>
   );
 };
