@@ -95,7 +95,16 @@ const AddButton = styled.button`
 `;
 
 const Product = (props) => {
+  console.log("Component rerender");
   const [cart, setCart] = useState([]);
+  const [cartItems, setCartItems] = useState({});
+  const updateCart = function () {
+    const productName = props.name;
+    const price = props.price;
+    // console.log(productName, price);
+    setCartItems((prevCart) => ({ ...prevCart, productName, price }));
+    console.log(cartItems);
+  };
   const cartItem = function () {
     setCart((prev) => prev + 1);
   };
@@ -129,7 +138,7 @@ const Product = (props) => {
           }}
         >
           <Price>{props.price}</Price>
-          <AddButton onClick={cartItem}>ADD</AddButton>
+          <AddButton onClick={updateCart}>ADD</AddButton>
         </div>
       </div>
     </Card>

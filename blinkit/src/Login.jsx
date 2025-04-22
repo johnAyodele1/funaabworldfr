@@ -6,6 +6,7 @@ const Form = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const overlay = document.querySelector("._overlay_4r1zq_105");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email, password });
@@ -20,11 +21,13 @@ const Form = (props) => {
       .then((msg) => {
         console.log(msg);
         console.log(msg.status);
+        localStorage.setItem("user", JSON.stringify(msg));
         if (msg.status == "success") {
           alert("Login Successful");
           overlay.style.display = "none";
           document.querySelector("._login_4r1zq_71").textContent =
             msg.user.name;
+          props.remove();
         } else alert("Invalid Email or Password");
       });
   };

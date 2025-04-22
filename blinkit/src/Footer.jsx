@@ -94,7 +94,7 @@ const Footer = () => {
             <a href="#" className="">
               Franchise
             </a>
-            <a href="#" className="">
+            <a href="addproduct" className="">
               Seller
             </a>
             <a href="#" className="">

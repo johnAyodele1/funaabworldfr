@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import logo from "/logo.svg";
 const Container = styled.div`
   max-width: 600px;
   margin: 40px auto;
@@ -10,9 +11,16 @@ const Container = styled.div`
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 `;
 
-const Title = styled.h2`
+const Title = styled.div`
   font-size: 28px;
   font-weight: bold;
+  color: black;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
   margin-bottom: 24px;
 `;
 
@@ -60,14 +68,21 @@ const Button = styled.button`
 `;
 
 export default function AddProduct() {
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const [formData, setFormData] = useState({
     name: "",
+    seller: user.user._id,
     price: "",
     description: "",
     category: "",
     image: null,
   });
 
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "image") {
@@ -79,14 +94,45 @@ export default function AddProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("New Product Submitted:", formData);
-
+    fetch("http://127.0.0.1:3000/createproduct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === "success") {
+          alert("Product Created Successfully");
+        } else {
+          alert(res.message);
+        }
+        console.log(res);
+      });
+    navigate("/");
     // You can use FormData to send this to backend via fetch/axios
   };
 
   return (
     <Container>
-      <Title>Add New Product</Title>
+      <Title>
+        <img
+          src={logo}
+          alt="logo"
+          style={{
+            display: "block",
+            width: "8rem",
+          }}
+        />{" "}
+        <div
+          style={{
+            display: "block",
+          }}
+        >
+          Add New Product
+        </div>
+      </Title>
       <Form onSubmit={handleSubmit}>
         <Input
           type="text"
@@ -122,7 +168,9 @@ export default function AddProduct() {
           accept="image/*"
           onChange={handleChange}
         />
-        <Button type="submit">Submit Product</Button>
+        <Button type="submit" onClick={handleSubmit}>
+          Submit Product
+        </Button>
       </Form>
     </Container>
   );

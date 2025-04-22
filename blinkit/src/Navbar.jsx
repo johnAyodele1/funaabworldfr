@@ -1,11 +1,12 @@
 import blinkit from "/logo.svg";
-import { useState, useEffect, useRef } from "react";
+import { useState, useLayoutEffect, useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
 // import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import Cart from "./Cart";
 const Navbar = () => {
+  const loginName = useRef(null);
   const overlayCart = document.querySelector("._mainDiv_1edos_1");
   const openOverlay = () => {
     overlayCart.style.display = "grid";
@@ -13,8 +14,11 @@ const Navbar = () => {
   const [placeholder, setPlaceholder] = useState("Search");
   const [login, setLogin] = useState(false);
   const overlay = useRef(null);
+  const [remove, setRemove] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
 
+  //For Searh bar changing the search  name.
   useEffect(() => {
     const displayItems = [
       "egg",
@@ -37,21 +41,25 @@ const Navbar = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  //Prevent login overlay from showing
   const toggleLogIn = () => {
     setLogin(true);
   };
+  //To sign up or login
   const toggleSignIn = () => {
     setLogin(false);
   };
-  useEffect(() => {
-    // const overlay = document.querySelector("._overlay_sqgjf_103");
-    const login = document.querySelector("._login_4r1zq_71");
-    const closeBtn = document.querySelector(".closeBtn");
-    if (!overlay) return; // Ensure overlay exists
-    if (isLoggedIn) {
-      overlay.style.display = "none";
-    }
+  // to remove the event listner on loginName
 
+  useLayoutEffect(() => {
+    //Function to open or close overlay
+    const closeBtn = document.querySelector(".closeBtn");
+
+    if (!overlay) return; // Ensure overlay exists
+    if (user) {
+      loginName.current.textContent = user.user.name;
+    }
     const closeOverlay = () => {
       overlay.current.style.display = "none";
     };
@@ -63,26 +71,39 @@ const Navbar = () => {
           overlay.current.style.display = "block"; // Then show
         }, 10); // A slight delay forces repaint
       }
-      // Correct function definition
     };
-
-    login.addEventListener("click", toogleOverlay);
-    closeBtn.addEventListener("click", closeOverlay);
+    //remove event listner of loginName
+    if (remove) {
+      loginName.current.removeEventListener("click", toogleOverlay);
+      console.log("Event Removed");
+    }
+    //Ensure the login button can only show overlay if there is no user
+    if (!user) {
+      loginName.current.addEventListener("click", toogleOverlay);
+      closeBtn.addEventListener("click", closeOverlay);
+    }
 
     return () => {
-      login.removeEventListener("click", toogleOverlay);
-      closeBtn.removeEventListener("click", closeOverlay); // Cleanup
+      // Cleanup function
+      if (!user) {
+        closeBtn.removeEventListener("click", closeOverlay);
+        loginName.current.removeEventListener("click", toogleOverlay);
+      }
+      // Cleanup
     };
   }, []);
+
   return (
     <div className={styles.body}>
-      <div ref={overlay} className={styles.overlay}>
-        {login ? (
-          <Login toggle={toggleSignIn} />
-        ) : (
-          <Signup toggle={toggleLogIn} />
-        )}
-      </div>
+      {user ? null : (
+        <div ref={overlay} className={styles.overlay}>
+          {login ? (
+            <Login toggle={toggleSignIn} remove={removeEvent} />
+          ) : (
+            <Signup toggle={toggleLogIn} remove={removeEvent} />
+          )}
+        </div>
+      )}
 
       <div className={styles.logoDiv}>
         <img className={styles.logo} src={blinkit} alt="BlinkIt logo" />
@@ -114,7 +135,7 @@ const Navbar = () => {
         />
       </div>
       <div className={styles.register}>
-        <a href="#" className={styles.login}>
+        <a href="#" className={styles.login} ref={loginName}>
           Login
         </a>
         <button className={styles.cart} onClick={openOverlay}>

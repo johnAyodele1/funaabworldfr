@@ -37,6 +37,7 @@ const Form = (props) => {
           overlay.style.display = "none";
           document.querySelector("._login_4r1zq_71").textContent =
             msg.user.name;
+          props.remove();
         } else alert(msg.message);
       });
   };
