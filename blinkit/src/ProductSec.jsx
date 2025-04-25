@@ -16,6 +16,9 @@ import image13 from "./assets/toppng.com-canned-food-618x400.png";
 import image14 from "./assets/tried.jpg";
 import styles from "./ProductSec.module.css";
 const ProductSec = () => {
+  const data = fetch("http://localhost:5173/getproducts")
+    .then((res) => res.json())
+    .then((res) => console.log(res));
   return (
     <div>
       <div
@@ -74,7 +77,7 @@ const ProductSec = () => {
               id: 3,
               name: "Amul Blend Diced Cheese",
               price: "$20",
-              size: "200ml",
+              size: "300g",
               time: "60 MINS",
             },
             {
@@ -82,7 +85,7 @@ const ProductSec = () => {
               id: 4,
               name: "Harvest Gold - White Bread",
               price: "$28",
-              size: "100ml",
+              size: "100g",
               time: "15 MINS",
             },
             {

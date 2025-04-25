@@ -68,6 +68,22 @@ const Button = styled.button`
 `;
 
 export default function AddProduct() {
+  const category = [
+    "Choose a category",
+    "Oil & More",
+    "Fruits & Vegetables",
+    "Cleaning & Essentials",
+    "Personal & Care",
+    "Sauces & Spreads",
+    "Snacks & Munchies",
+    "Tea & Coffee",
+    "Chicken & Meat",
+    "Drinks & Juices",
+    "Dairy & Breads",
+    "Home & Offices",
+    "Organic & Instant",
+    "Bakery & Biscuits",
+  ];
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -77,6 +93,7 @@ export default function AddProduct() {
     price: "",
     description: "",
     category: "",
+    size: "",
     image: null,
   });
 
@@ -155,12 +172,19 @@ export default function AddProduct() {
           onChange={handleChange}
           required
         />
+        <Input
+          type="text"
+          name="size"
+          placeholder="Size (e.g. 500g)"
+          onChange={handleChange}
+          required
+        />
         <Select name="category" onChange={handleChange} required>
-          <option value="">Select Category</option>
-          <option value="grocery">Grocery</option>
-          <option value="pharmacy">Pharmacy</option>
-          <option value="pet">Pet Care</option>
-          <option value="baby">Baby Essentials</option>
+          {category.map((el) => (
+            <option value={el.split("&").join("").split(" ").join("")}>
+              {el}
+            </option>
+          ))}
         </Select>
         <Input
           type="file"

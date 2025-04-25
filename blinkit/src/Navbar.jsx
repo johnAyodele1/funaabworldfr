@@ -92,7 +92,9 @@ const Navbar = () => {
       // Cleanup
     };
   }, []);
-
+  const removeEvent = () => {
+    loginName.current.removeEventListener("click", toogleOverlay);
+  };
   return (
     <div className={styles.body}>
       {user ? null : (

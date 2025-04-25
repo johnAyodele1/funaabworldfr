@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Footer from "./Footer";
 import AddProduct from "./AddProduct";
+import Warehouse from "./Warehouse";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/addproduct" element={<AddProduct />} />
+            <Route path="/warehouse" element={<Warehouse />} />
           </Routes>
         )}
       </div>

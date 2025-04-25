@@ -97,7 +97,7 @@ const Footer = () => {
             <a href="addproduct" className="">
               Seller
             </a>
-            <a href="#" className="">
+            <a href="warehouse" className="">
               Warehouse
             </a>
             <a href="#" className="">

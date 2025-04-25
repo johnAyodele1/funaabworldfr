@@ -1,0 +1,111 @@
+.color {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#f8cb46),
+    to(#318616)
+  );
+  background: linear-gradient(180deg, #f8cb46 0, #318616 100%);
+  color: green;
+  height: 100vh;
+  padding: 1rem 1rem;
+}
+.heading {
+  width: 90vw;
+  margin: 0 auto;
+  opacity: 80%;
+  color: black;
+}
+.heading h1 {
+  font-size: 2.4rem;
+}
+.logo {
+  width: 8rem;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 2rem;
+}
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+.navLinks > li > a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.masthead {
+  height: 75vh;
+  margin-top: 2rem;
+}
+.hero {
+  display: flex;
+  width: 85vw;
+  margin: 0% auto;
+  align-items: center;
+}
+.register {
+  background-color: white;
+  height: 60vh;
+  width: 30vw;
+  color: black;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  line-height: 2;
+}
+.register h1 {
+  font-size: 1.8rem;
+}
+.form input {
+  background-color: whitesmoke;
+  border: none;
+  height: 3rem;
+  width: 45%;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  /* display: flex;
+  /* grid-template-columns: 1fr 1fr; */
+  /*gap: 2rem; */
+}
+.edu,
+.btnRe {
+  background-color: whitesmoke;
+  border: none;
+  height: 3rem;
+  width: 95%;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+.btnRe {
+  background-color: black;
+  color: white;
+  height: 2.5rem;
+  margin-top: 0rem;
+  cursor: pointer;
+}
+.form input::placeholder {
+  padding-left: 0.5rem;
+  /* color: ; */
+}
+.clickBait {
+  width: 90vw;
+  margin: 0 auto;
+  display: grid;
+  column-gap: 2rem;
+  row-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
