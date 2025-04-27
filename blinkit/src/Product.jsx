@@ -95,7 +95,6 @@ const AddButton = styled.button`
 `;
 
 const Product = (props) => {
-  console.log("Component rerender");
   const [cart, setCart] = useState([]);
   const [cartItems, setCartItems] = useState({});
   const updateCart = function () {
@@ -123,7 +122,7 @@ const Product = (props) => {
         />
       </ProductDiv>
       <div>
-        <DeliveryTime>{props.time}</DeliveryTime>
+        <DeliveryTime>{props.time} min</DeliveryTime>
         <ProductName>{props.name}</ProductName>
 
         <ProductSize>{props.size}</ProductSize>
@@ -137,7 +136,7 @@ const Product = (props) => {
             marginBottom: "0.5rem",
           }}
         >
-          <Price>{props.price}</Price>
+          <Price>N{props.price}</Price>nn
           <AddButton onClick={updateCart}>ADD</AddButton>
         </div>
       </div>

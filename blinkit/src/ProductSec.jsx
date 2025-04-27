@@ -15,10 +15,43 @@ import image12 from "./assets/simple.jpg";
 import image13 from "./assets/toppng.com-canned-food-618x400.png";
 import image14 from "./assets/tried.jpg";
 import styles from "./ProductSec.module.css";
+import { useState, useEffect } from "react";
 const ProductSec = () => {
-  const data = fetch("http://localhost:5173/getproducts")
-    .then((res) => res.json())
-    .then((res) => console.log(res));
+  const images = [
+    image1,
+    image2,
+    image3,
+    image4,
+    image5,
+    image6,
+    image7,
+    image8,
+    image9,
+    image0,
+    image11,
+    image12,
+    image13,
+    image14,
+  ];
+  const [data, setData] = useState([]);
+  const [fetchedData, setFetchedData] = useState();
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:3000/getproducts")
+      .then((res) => res.json())
+      .then((res) => {
+        setData(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
+    if (data.data?.product) {
+      setFetchedData(data.data.product);
+    }
+    console.log(data, fetchedData);
+  }, [data, fetchedData]);
+  const secData = fetchedData?.filter((el) => el.category == "dairyBreads");
+
   return (
     <div>
       <div
@@ -55,65 +88,24 @@ const ProductSec = () => {
       <div className={styles.mainDiv}>
         {
           // Mock product data
-          [
-            {
-              image: image1,
-              id: 1,
-              name: "Amul Gold Full Cream Fresh Milk",
-              price: "$25",
-              size: "500ml",
-              time: "30 MINS",
-            },
-            {
-              image: image2,
-              id: 2,
-              name: "Amul Salted Butter",
-              price: "$30",
-              size: "300ml",
-              time: "45 MINS",
-            },
-            {
-              image: image0,
-              id: 3,
-              name: "Amul Blend Diced Cheese",
-              price: "$20",
-              size: "300g",
-              time: "60 MINS",
-            },
-            {
-              image: image4,
-              id: 4,
-              name: "Harvest Gold - White Bread",
-              price: "$28",
-              size: "100g",
-              time: "15 MINS",
-            },
-            {
-              image: image5,
-              id: 5,
-              name: "Amul Taaza Toned Fresh Milk",
-              price: "$22",
-              size: "500ml",
-              time: "30 MINS",
-            },
-            {
-              image: image6,
-              id: 6,
-              name: "Mother Dairy Full Cream Fresh Milk",
-              price: "$28",
-              size: "540ml",
-              time: "23 MINS",
-            },
-          ].map((product) => (
-            <Product
-              key={product.id}
-              image={product.image}
-              name={product.name}
-              price={product.price}
-              size={product.size}
-              time={product.time}
-            />
-          ))
+
+          secData?.map((product) => {
+            let randomNumber = Math.floor(Math.random() * 13) + 1;
+            let time = Math.floor(Math.random() * 58) + 1;
+            // random number between 1-14
+            const image = images[randomNumber];
+            return (
+              <Product
+                key={product.id}
+                image={image}
+                name={product.name}
+                price={product.price}
+                size={product.size}
+                time={time}
+                randomNumber={randomNumber} // If you want to pass the random number to the Product component
+              />
+            );
+          })
         }
       </div>
     </div>

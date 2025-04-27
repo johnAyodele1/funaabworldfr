@@ -1,0 +1,109 @@
+.mainDiv {
+  margin: 0%;
+  padding: 0%;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+.leftView {
+  padding: 5rem 0rem 0rem 15rem;
+}
+.firstView {
+  width: 20rem;
+  border-radius: 0.5rem;
+  max-height: 15rem;
+}
+.rightView {
+  border-left: 2px solid rgba(138, 137, 137, 0.164);
+  padding-left: 3rem;
+  color: black;
+}
+.title {
+  opacity: 90%;
+  font-weight: 600;
+}
+.title span {
+  opacity: 60%;
+  font-weight: 500;
+}
+.heading {
+  margin-top: 0rem;
+  font-size: 2.2rem;
+}
+.time {
+  padding: 0.2rem;
+  background-color: rgba(178, 180, 180, 0.164);
+  max-width: 5.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  margin-bottom: 0%;
+  /* letter-spacing: 0.2px; */
+}
+.link {
+  font-size: 1.8rem;
+  color: #0c831f;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.section {
+  border-bottom: 1px solid rgba(138, 137, 137, 0.363);
+}
+.productDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 2rem;
+}
+.productDetails p {
+  margin: 0%;
+  margin-top: 0.2rem;
+  padding: 0%;
+}
+.price {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.price span {
+  font-weight: 700;
+}
+.size {
+  font-weight: 600;
+  opacity: 80%;
+}
+.tax {
+  font-weight: 400;
+  opacity: 70%;
+}
+.button {
+  border: none;
+  color: white;
+  font-weight: 700;
+  width: 5rem;
+  height: 2.2rem;
+  word-spacing: 5px;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  background-color: #0c831f;
+}
+.title2,
+.get {
+  opacity: 80%;
+}
+.title2 {
+  font-size: 1.5rem;
+}
+.bait {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.delivery {
+  width: 4rem;
+}
+.superFast {
+  font-size: 1.1rem;
+}
+.get {
+  opacity: 80%;
+}
