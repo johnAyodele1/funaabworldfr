@@ -85,27 +85,43 @@ const ProductSec = () => {
           see all
         </p>
       </div>
-      <div className={styles.mainDiv}>
+      <div>
         {
           // Mock product data
-
-          secData?.map((product) => {
-            let randomNumber = Math.floor(Math.random() * 13) + 1;
-            let time = Math.floor(Math.random() * 58) + 1;
-            // random number between 1-14
-            const image = images[randomNumber];
-            return (
-              <Product
-                key={product.id}
-                image={image}
-                name={product.name}
-                price={product.price}
-                size={product.size}
-                time={time}
-                randomNumber={randomNumber} // If you want to pass the random number to the Product component
-              />
-            );
-          })
+          secData?.length > 0 ? (
+            <div className={styles.mainDiv}>
+              {secData?.map((product) => {
+                let randomNumber = Math.floor(Math.random() * 13) + 1;
+                let time = Math.floor(Math.random() * 58) + 1;
+                // random number between 1-14
+                const image = images[randomNumber];
+                return (
+                  <Product
+                    key={product.id}
+                    image={image}
+                    name={product.name}
+                    price={product.price}
+                    size={product.size}
+                    time={time}
+                    randomNumber={randomNumber} // If you want to pass the random number to the Product component
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div>
+              <p
+                style={{
+                  color: "black",
+                  fontSize: "1.5rem",
+                  opacity: "80%",
+                  textAlign: "center",
+                }}
+              >
+                No Product avaliable for this section
+              </p>
+            </div>
+          )
         }
       </div>
     </div>

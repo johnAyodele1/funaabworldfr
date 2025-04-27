@@ -86,7 +86,7 @@ export default function AddProduct() {
   ];
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-
+  const [selectedImage, setSelectedImage] = useState();
   const [formData, setFormData] = useState({
     name: "",
     seller: user.user._id,
@@ -104,6 +104,7 @@ export default function AddProduct() {
     const { name, value, files } = e.target;
     if (name === "image") {
       setFormData({ ...formData, image: files[0] });
+      setSelectedImage(e.target.files[0].name);
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -111,12 +112,21 @@ export default function AddProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("seller", formData.seller);
+    data.append("price", formData.price);
+    data.append("description", formData.description);
+    data.append("category", formData.category);
+    data.append("size", formData.size);
+    if (formData.image) {
+      data.append("image", formData.image);
+    }
+
     fetch("http://127.0.0.1:3000/createproduct", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+      body: data,
     })
       .then((res) => res.json())
       .then((res) => {
@@ -128,7 +138,6 @@ export default function AddProduct() {
         console.log(res);
       });
     navigate("/");
-    // You can use FormData to send this to backend via fetch/axios
   };
 
   return (
@@ -150,7 +159,7 @@ export default function AddProduct() {
           Add New Product
         </div>
       </Title>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} encType="multipart/form-data">
         <Input
           type="text"
           name="name"
@@ -186,15 +195,28 @@ export default function AddProduct() {
             </option>
           ))}
         </Select>
-        <Input
-          type="file"
-          name="image"
-          accept="image/*"
-          onChange={handleChange}
-        />
-        <Button type="submit" onClick={handleSubmit}>
-          Submit Product
-        </Button>
+        <Input type="file" name="image" onChange={handleChange} />
+        {selectedImage && (
+          <p
+            style={{
+              color: "black",
+              fontSize: "1.1rem",
+              margin: "0",
+              opacity: "95%",
+              textAlign: "center",
+            }}
+          >
+            Selected Image:{" "}
+            <span
+              style={{
+                opacity: "80%",
+              }}
+            >
+              {selectedImage}
+            </span>
+          </p>
+        )}
+        <Button type="submit">Submit Product</Button>
       </Form>
     </Container>
   );
