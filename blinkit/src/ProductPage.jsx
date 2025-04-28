@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router";
 import Navbar from "./Navbar";
 import image6 from "./assets/Café Tradicional Del Trópico - Copy.jpg";
 import img1 from "./warehouse/warehouse-icon-medical_1.webp";

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import swal from "sweetalert";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "/logo.svg";
@@ -131,7 +132,7 @@ export default function AddProduct() {
       .then((res) => res.json())
       .then((res) => {
         if (res.status === "success") {
-          alert("Product Created Successfully");
+          swal("Success", "Product added successfully", "success");
         } else {
           alert(res.message);
         }
