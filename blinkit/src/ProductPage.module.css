@@ -8,9 +8,9 @@
   padding: 5rem 0rem 0rem 15rem;
 }
 .firstView {
-  width: 20rem;
+  max-width: 30rem;
   border-radius: 0.5rem;
-  max-height: 15rem;
+  max-height: 25rem;
 }
 .rightView {
   border-left: 2px solid rgba(138, 137, 137, 0.164);

@@ -92,11 +92,13 @@ const ProductSec = () => {
             <div className={styles.mainDiv}>
               {secData?.map((product) => {
                 let time = Math.floor(Math.random() * 58) + 1;
+                console.log(product.id);
                 // random number between 1-14
                 const image = `http://127.0.0.1:3000/uploads/${product.image}`;
                 return (
                   <Product
                     key={product.id}
+                    id={product.id}
                     image={image}
                     name={product.name}
                     price={product.price}

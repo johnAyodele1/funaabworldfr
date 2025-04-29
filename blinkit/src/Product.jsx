@@ -1,5 +1,6 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
+import { Link } from "react-router";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -97,6 +98,7 @@ const AddButton = styled.button`
 const Product = (props) => {
   const [cart, setCart] = useState([]);
   const [cartItems, setCartItems] = useState({});
+  const [link, setLink] = useState();
   const updateCart = function () {
     const productName = props.name;
     const price = props.price;
@@ -107,6 +109,9 @@ const Product = (props) => {
   const cartItem = function () {
     setCart((prev) => prev + 1);
   };
+  useLayoutEffect(() => {
+    setLink(`product/${props.id}`);
+  }, []);
 
   return (
     <Card>
@@ -137,7 +142,17 @@ const Product = (props) => {
           }}
         >
           <Price>N{props.price}</Price>nn
-          <AddButton onClick={updateCart}>ADD</AddButton>
+          <AddButton onClick={updateCart}>
+            <Link
+              to={link}
+              style={{
+                color: " #0c831f",
+                textDecoration: "none",
+              }}
+            >
+              ADD
+            </Link>
+          </AddButton>
         </div>
       </div>
     </Card>

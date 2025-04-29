@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import AddProduct from "./AddProduct";
 import Warehouse from "./Warehouse";
 import ProductPage from "./ProductPage";
+import AdminPage from "./AdminPage";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -29,7 +30,8 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/addproduct" element={<AddProduct />} />
             <Route path="/warehouse" element={<Warehouse />} />
-            <Route path="/productpage" element={<ProductPage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/adminpage" element={<AdminPage />} />
           </Routes>
         )}
       </div>

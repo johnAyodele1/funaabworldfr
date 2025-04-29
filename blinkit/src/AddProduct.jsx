@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "/logo.svg";
@@ -132,7 +132,13 @@ export default function AddProduct() {
       .then((res) => res.json())
       .then((res) => {
         if (res.status === "success") {
-          swal("Success", "Product added successfully", "success");
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         } else {
           alert(res.message);
         }

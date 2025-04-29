@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Navbar from "./Navbar";
 import image6 from "./assets/Café Tradicional Del Trópico - Copy.jpg";
@@ -8,28 +9,37 @@ import img3 from "./warehouse/warehouse-icon-salary_1.webp";
 import img4 from "./warehouse/warehouse-icon-transportation_1.webp";
 import styles from "./ProductPage.module.css";
 const ProductPage = () => {
+  const { id } = useParams();
+  const [data, setData] = useState();
+  useEffect(() => {
+    fetch(`http://127.0.0.1:3000/product/${id}`)
+      .then((res) => res.json())
+      .then((res) => setData(res));
+  }, []);
+  const product = data?.data.product;
+  const image = `http://127.0.0.1:3000/uploads/${product?.image}`;
   return (
     <div>
       <Navbar />
       <div className={styles.mainDiv}>
         <div className={styles.leftView}>
-          <img src={image6} className={styles.firstView} />
+          <img src={image} className={styles.firstView} />
         </div>
         <div className={styles.rightView}>
           <div className={styles.section}>
             <p className={styles.title}>
-              Home / Curd & Yorghurt / <span>Del Cafe Traditional</span>
+              Home / Curd & Yorghurt / <span>{product && product.name}</span>
             </p>
-            <h1 className={styles.heading}>Del Cafe Traditional</h1>
+            <h1 className={styles.heading}>{product && product?.name}</h1>
             <p className={styles.time}>⏳ 13 MINS</p>
             <p className={styles.link}>View all by Del</p>
           </div>
           <div>
             <div className={styles.productDetails}>
               <div>
-                <p className={styles.size}>400g</p>
+                <p className={styles.size}>{product && product?.size}</p>
                 <p className={styles.price}>
-                  MRP <span>N35</span>
+                  MRP <span>N{product && product?.price}</span>
                 </p>
                 <p className={styles.tax}>(Inclusive of all taxes)</p>
               </div>

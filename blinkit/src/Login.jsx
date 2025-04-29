@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import styles from "./Login.module.css";
+import Swal from "sweetalert";
 import { useState, useEffect, useRef } from "react";
 const Form = (props) => {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ const Form = (props) => {
         console.log(msg.status);
         localStorage.setItem("user", JSON.stringify(msg));
         if (msg.status == "success") {
-          alert("Login Successful");
+          Swal("Sucess", "Login successful", "success");
           overlay.style.display = "none";
           document.querySelector("._login_4r1zq_71").textContent =
             msg.user.name;
