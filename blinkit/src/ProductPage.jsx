@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Navbar from "./Navbar";
 import image6 from "./assets/Café Tradicional Del Trópico - Copy.jpg";
 import img1 from "./warehouse/warehouse-icon-medical_1.webp";
@@ -9,12 +9,19 @@ import img3 from "./warehouse/warehouse-icon-salary_1.webp";
 import img4 from "./warehouse/warehouse-icon-transportation_1.webp";
 import styles from "./ProductPage.module.css";
 const ProductPage = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState();
   useEffect(() => {
     fetch(`http://127.0.0.1:3000/product/${id}`)
       .then((res) => res.json())
-      .then((res) => setData(res));
+      .then((res) => {
+        if (res.status !== "success") {
+          swal("Error", "No product with this route exist", "error");
+          return navigate("/");
+        }
+        setData(res);
+      });
   }, []);
   const product = data?.data.product;
   const image = `http://127.0.0.1:3000/uploads/${product?.image}`;

@@ -141,18 +141,23 @@ const Product = (props) => {
             marginBottom: "0.5rem",
           }}
         >
-          <Price>N{props.price}</Price>nn
-          <AddButton onClick={updateCart}>
-            <Link
-              to={link}
+          <Price>N{props.price}</Price>
+          <Link
+            to={link}
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            <AddButton
+              onClick={updateCart}
               style={{
                 color: " #0c831f",
                 textDecoration: "none",
               }}
             >
               ADD
-            </Link>
-          </AddButton>
+            </AddButton>
+          </Link>
         </div>
       </div>
     </Card>

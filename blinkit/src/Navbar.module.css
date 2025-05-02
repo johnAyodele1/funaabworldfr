@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: space-around;
   gap: 2rem;
-
+  padding-left: 2rem;
   padding-right: 5rem;
 }
 .login {
@@ -81,6 +81,8 @@
   font-size: 1em;
   font-weight: 500;
   cursor: pointer;
+  width: 7rem;
+  height: 3rem;
   transition: border-color 0.25s;
 }
 .logo {
