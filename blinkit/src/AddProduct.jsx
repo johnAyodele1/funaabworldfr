@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "/logo.svg";
+import logo from "/logo.png";
 const Container = styled.div`
   max-width: 600px;
   margin: 40px auto;
@@ -155,7 +155,7 @@ export default function AddProduct() {
           alt="logo"
           style={{
             display: "block",
-            width: "8rem",
+            width: "15rem",
           }}
         />{" "}
         <div

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
-import logo from "/logo.svg";
+import logo from "/logo.png";
 
 const AdminPage = () => {
   const category = [
@@ -27,15 +27,13 @@ const AdminPage = () => {
     { id: 2, name: "Product B", price: 15.49 },
     { id: 3, name: "Product C", price: 7.99 },
   ]);
+  const [fliteredProduct, setFliteredProduct] = useState();
   const [data, setData] = useState();
-  const [sellers, setSellers] = useState([
-    { id: 1, name: "Seller One", email: "seller1@example.com" },
-    { id: 2, name: "Seller Two", email: "seller2@example.com" },
-    { id: 3, name: "Seller Three", email: "seller3@example.com" },
-  ]);
+  const [sellers, setSellers] = useState([]);
   useEffect(() => {
     if (data?.data.product.length > 0) {
       setProducts(data.data.product);
+      setFliteredProduct(products);
     }
   }, [data]);
   useEffect(() => {
@@ -47,7 +45,8 @@ const AdminPage = () => {
       .then((res) => {
         console.log(res);
         setData(res);
-      });
+      })
+      .catch((err) => swal("Error", err.message, "error"));
   }, []);
 
   // useEffect(() => {
@@ -56,6 +55,11 @@ const AdminPage = () => {
   //     navigate("/");
   //   }
   // }, []);
+  const handleCategory = (e) => {
+    const { value } = e.target;
+    setFliteredProduct(products?.filter((el) => el.category === value));
+    console.log(fliteredProduct);
+  };
 
   const handleDeleteProduct = (id) => {
     console.log(id);
@@ -74,6 +78,21 @@ const AdminPage = () => {
     }
   };
 
+  // Populate sellers from products, assuming each product has a seller object
+  useEffect(() => {
+    const uniqueSellers = [];
+    products.forEach((product) => {
+      if (
+        product.seller &&
+        !uniqueSellers.some((s) => s.id === product.seller.id)
+      ) {
+        uniqueSellers.push(product.seller);
+      }
+    });
+    setSellers(uniqueSellers);
+  }, [products]);
+
+  console.log(sellers);
   return (
     <div
       style={{
@@ -92,7 +111,7 @@ const AdminPage = () => {
         <img
           src={logo}
           style={{
-            width: "13rem",
+            width: "15rem",
           }}
         />
         <h1>Admin Control Panel</h1>
@@ -115,6 +134,7 @@ const AdminPage = () => {
               padding: ".5rem 1rem",
               backgroundColor: "rgba(153, 153, 153, 0.238)",
             }}
+            onChange={handleCategory}
           >
             {category.map((el) => (
               <option value={el.split("&").join("").split(" ").join("")}>
@@ -136,7 +156,7 @@ const AdminPage = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {fliteredProduct?.map((product) => (
                 <tr key={product.id} style={{ borderBottom: "1px solid #eee" }}>
                   <td style={{ padding: "8px" }}>{product.id}</td>
                   <td style={{ padding: "8px" }}>{product.name}</td>
@@ -165,7 +185,7 @@ const AdminPage = () => {
 
       <section>
         <h2>Sellers ({sellers.length})</h2>
-        {sellers.length === 0 ? (
+        {products.length === 0 ? (
           <p>No sellers available.</p>
         ) : (
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -177,11 +197,11 @@ const AdminPage = () => {
               </tr>
             </thead>
             <tbody>
-              {sellers.map((seller) => (
-                <tr key={seller.id} style={{ borderBottom: "1px solid #eee" }}>
-                  <td style={{ padding: "8px" }}>{seller.id}</td>
-                  <td style={{ padding: "8px" }}>{seller.name}</td>
-                  <td style={{ padding: "8px" }}>{seller.email}</td>
+              {sellers?.map((seller) => (
+                <tr key={seller?.id} style={{ borderBottom: "1px solid #eee" }}>
+                  <td style={{ padding: "8px" }}>{seller?.id}</td>
+                  <td style={{ padding: "8px" }}>{seller?.name}</td>
+                  <td style={{ padding: "8px" }}>{seller?.email}</td>
                 </tr>
               ))}
             </tbody>

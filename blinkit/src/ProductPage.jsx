@@ -55,7 +55,7 @@ const ProductPage = () => {
               </div>
             </div>
             <div>
-              <h1 className={styles.title2}>Why shop from blinkit</h1>
+              <h1 className={styles.title2}>Why shop from funaab world</h1>
               <div>
                 <div className={styles.bait}>
                   <div>

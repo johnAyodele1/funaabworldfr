@@ -1,16 +1,13 @@
-import blinkit from "/logo.svg";
+import blinkit from "/logo.png";
 import { useState, useLayoutEffect, useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import Cart from "./Cart";
+
 const Navbar = () => {
   const loginName = useRef(null);
-  const overlayCart = document.querySelector("._mainDiv_1edos_1");
-  const openOverlay = () => {
-    overlayCart.style.display = "grid";
-  };
+  const overlayCart = useRef(null);
   const [placeholder, setPlaceholder] = useState("Search");
   const [login, setLogin] = useState(false);
   const overlay = useRef(null);
@@ -18,7 +15,6 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
-  //For Searh bar changing the search  name.
   useEffect(() => {
     const displayItems = [
       "egg",
@@ -42,59 +38,64 @@ const Navbar = () => {
     return () => clearInterval(interval);
   }, []);
 
-  //Prevent login overlay from showing
   const toggleLogIn = () => {
     setLogin(true);
   };
-  //To sign up or login
+
   const toggleSignIn = () => {
     setLogin(false);
   };
-  // to remove the event listner on loginName
+
+  const openOverlay = () => {
+    if (overlayCart.current) {
+      overlayCart.current.style.display = "grid";
+    }
+  };
 
   useLayoutEffect(() => {
-    //Function to open or close overlay
     const closeBtn = document.querySelector(".closeBtn");
 
-    if (!overlay) return; // Ensure overlay exists
     if (user) {
       loginName.current.textContent = user.user.name;
     }
+
     const closeOverlay = () => {
-      overlay.current.style.display = "none";
-    };
-    const toogleOverlay = () => {
-      setIsLoggedIn(false);
       if (overlay.current) {
-        overlay.current.style.display = "none"; // Temporarily hide
-        setTimeout(() => {
-          overlay.current.style.display = "block"; // Then show
-        }, 10); // A slight delay forces repaint
+        overlay.current.style.display = "none";
       }
     };
-    //remove event listner of loginName
+
+    const toggleOverlay = () => {
+      setIsLoggedIn(false);
+      if (overlay.current) {
+        overlay.current.style.display = "none";
+        setTimeout(() => {
+          overlay.current.style.display = "block";
+        }, 10);
+      }
+    };
+
     if (remove) {
-      loginName.current.removeEventListener("click", toogleOverlay);
-      console.log("Event Removed");
+      loginName.current.removeEventListener("click", toggleOverlay);
     }
-    //Ensure the login button can only show overlay if there is no user
+
     if (!user) {
-      loginName.current.addEventListener("click", toogleOverlay);
+      loginName.current.addEventListener("click", toggleOverlay);
       closeBtn.addEventListener("click", closeOverlay);
     }
 
     return () => {
-      // Cleanup function
       if (!user) {
         closeBtn.removeEventListener("click", closeOverlay);
-        loginName.current.removeEventListener("click", toogleOverlay);
+        loginName.current.removeEventListener("click", toggleOverlay);
       }
-      // Cleanup
     };
-  }, []);
+  }, [user, remove]);
+
   const removeEvent = () => {
-    loginName.current.removeEventListener("click", toogleOverlay);
+    loginName.current.removeEventListener("click", toggleOverlay);
   };
+
   return (
     <div className={styles.body}>
       {user ? null : (
@@ -144,7 +145,7 @@ const Navbar = () => {
           My cart
         </button>
       </div>
-      <Cart />
+      <Cart ref={overlayCart} />
     </div>
   );
 };

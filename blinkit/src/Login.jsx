@@ -30,7 +30,8 @@ const Form = (props) => {
             msg.user.name;
           props.remove();
         } else alert("Invalid Email or Password");
-      });
+      })
+      .catch((err) => swal("Error", err.message, "error"));
   };
 
   return (

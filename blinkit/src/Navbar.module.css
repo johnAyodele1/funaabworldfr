@@ -6,13 +6,15 @@
   height: 5rem;
   padding: 1rem 2rem;
   display: flex;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   align-items: center;
   justify-content: space-between;
   margin-top: -1px;
-  border-top: 0.5px rgba(206, 205, 205, 0.712) solid;
+  /* border-top: 0.5px rgba(206, 205, 205, 0.712) solid; */
   border-bottom: 0.5px rgba(206, 205, 205, 0.712) solid;
   margin-bottom: 1rem;
+  gap: 1rem;
 }
 
 .searchInput {
@@ -24,6 +26,9 @@
   font-size: 1.8rem;
   border-radius: 5px;
   border-radius: 1rem;
+  flex-grow: 1;
+  min-width: 200px;
+  max-width: 400px;
 }
 .register {
   display: flex;
@@ -32,6 +37,8 @@
   gap: 2rem;
   padding-left: 2rem;
   padding-right: 5rem;
+  min-width: 150px;
+  flex-shrink: 0;
 }
 .login {
   font-size: 1.8rem;
@@ -86,12 +93,13 @@
   transition: border-color 0.25s;
 }
 .logo {
-  height: 38px;
+  width: 15rem;
   position: relative;
 }
 .logoDiv {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 .logoLine {
   height: 20vh;
