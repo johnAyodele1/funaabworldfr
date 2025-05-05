@@ -1,37 +1,47 @@
 import React, { useState, useEffect } from "react";
 import Product from "./Product";
+import { useNavigate } from "react-router-dom";
 
 const SellerPage = () => {
-  // Mock seller products data
   const [products, setProducts] = useState([]);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Mock data simulating seller's products
-    const mockProducts = [
-      {
-        id: 1,
-        name: "Sunflower Oil",
-        price: 1200,
-        size: "1 L",
-        image: "Safya - 100% Pure Sunflower Oil, 1 L (33_8 fl oz).jpg",
+    if (!user) return;
+    fetch("http://127.0.0.1:3000/getproducts")
+      .then((res) => res.json())
+      .then((res) => {
+        // Filter products by seller ID
+        const sellerProducts = res.data.product.filter(
+          (product) => product.seller._id === user.user._id
+        );
+        setProducts(sellerProducts);
+      })
+      .catch((err) => console.log(err));
+  }, []); // Removed user from dependency array to prevent rerender loop
+
+  const handleEdit = (id) => {
+    navigate(`/editproduct/${id}`);
+  };
+
+  const handleDelete = (id) => {
+    fetch("http://127.0.0.1:3000/deleteproduct", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
       },
-      {
-        id: 2,
-        name: "Organic Biscuits",
-        price: 500,
-        size: "200 g",
-        image: "bakeryBiscuits.jpg",
-      },
-      {
-        id: 3,
-        name: "Green Tea",
-        price: 800,
-        size: "250 g",
-        image: "teaCoffee.jpg",
-      },
-    ];
-    setProducts(mockProducts);
-  }, []);
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => {
+        if (res.status === 204) {
+          setProducts(products.filter((product) => product._id !== id));
+        } else {
+          alert("Failed to delete product");
+        }
+      })
+      .catch((err) => alert("Error deleting product: " + err.message));
+  };
 
   return (
     <div style={{ padding: "1rem" }}>
@@ -46,19 +56,70 @@ const SellerPage = () => {
       >
         {products.length > 0 ? (
           products.map((product) => {
-            // Random delivery time between 10 and 60 minutes
+            // Mock sales and revenue
+            const sales = Math.floor(Math.random() * 1000);
+            const revenue = sales * parseFloat(product.price);
             const time = Math.floor(Math.random() * 51) + 10;
             const imageUrl = `http://127.0.0.1:3000/uploads/${product.image}`;
             return (
-              <Product
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                size={product.size}
-                image={imageUrl}
-                time={time}
-              />
+              <div key={product._id} style={{ position: "relative" }}>
+                <Product
+                  id={product._id}
+                  name={product.name}
+                  price={product.price}
+                  size={product.size}
+                  image={imageUrl}
+                  time={time}
+                />
+                <div
+                  style={{
+                    marginTop: "0.5rem",
+                    color: "black",
+                    fontWeight: "bold",
+                    fontSize: "0.9rem",
+                    width: "13rem",
+                    textAlign: "center",
+                  }}
+                >
+                  <p>Sales: {sales}</p>
+                  <p>Revenue: ₹{revenue.toFixed(2)}</p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "0.5rem",
+                    width: "13rem",
+                  }}
+                >
+                  <button
+                    onClick={() => handleEdit(product._id)}
+                    style={{
+                      backgroundColor: "#0c831f",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "4px",
+                      padding: "0.3rem 0.6rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    style={{
+                      backgroundColor: "#d9534f",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "4px",
+                      padding: "0.3rem 0.6rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             );
           })
         ) : (
