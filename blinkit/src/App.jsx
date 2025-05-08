@@ -13,6 +13,7 @@ import Warehouse from "./Warehouse";
 import ProductPage from "./ProductPage";
 import AdminPage from "./AdminPage";
 import SellerPage from "./SellerPage";
+import CategoryPage from "./CategoryPage";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -30,7 +31,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/addproduct" element={<AddProduct />} />
-            <Route path="/warehouse" element={<Warehouse />} />
+            <Route path="/warehouse" element={<CategoryPage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/adminpage" element={<AdminPage />} />
             <Route path="/seller" element={<SellerPage />} />

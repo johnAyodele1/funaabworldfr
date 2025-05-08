@@ -35,7 +35,8 @@ const ProductPage = () => {
         <div className={styles.rightView}>
           <div className={styles.section}>
             <p className={styles.title}>
-              Home / Curd & Yorghurt / <span>{product && product.name}</span>
+              Home / {product && product.category} /
+              <span>{product && product.name}</span>
             </p>
             <h1 className={styles.heading}>{product && product?.name}</h1>
             <p className={styles.time}>⏳ 13 MINS</p>

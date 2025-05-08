@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "/logo.png";
+import { category } from "../public/categoryName";
 const Container = styled.div`
   max-width: 600px;
   margin: 40px auto;
@@ -69,22 +70,6 @@ const Button = styled.button`
 `;
 
 export default function AddProduct() {
-  const category = [
-    "Choose a category",
-    "Oil & More",
-    "Fruits & Vegetables",
-    "Cleaning & Essentials",
-    "Personal & Care",
-    "Sauces & Spreads",
-    "Snacks & Munchies",
-    "Tea & Coffee",
-    "Chicken & Meat",
-    "Drinks & Juices",
-    "Dairy & Breads",
-    "Home & Offices",
-    "Organic & Instant",
-    "Bakery & Biscuits",
-  ];
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const [selectedImage, setSelectedImage] = useState();

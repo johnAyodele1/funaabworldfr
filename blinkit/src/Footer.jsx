@@ -1,6 +1,16 @@
 import React from "react";
 import styles from "./Footer.module.css";
 const Footer = () => {
+  const links = ["About", "Careers", "Blog", "Press", "Lead", "Value"];
+  const linkB = ["Privacy", "Terms", "FAQs", "Security", "Mobile", "Contact"];
+  const linkC = [
+    { title: "Partner", href: "#" },
+    { title: "Franchise", href: "#" },
+    { title: "Seller", href: "addproduct" },
+    { title: "Warehouse", href: "warehouse" },
+    { title: "Deliver", href: "#" },
+    { title: "Resources", href: " #" },
+  ];
   return (
     <div
       style={{
@@ -38,24 +48,9 @@ const Footer = () => {
               flexDirection: "column",
             }}
           >
-            <a href="#" className="">
-              About
-            </a>
-            <a href="#" className="">
-              Careers
-            </a>
-            <a href="#" className="">
-              Blog
-            </a>
-            <a href="#" className="">
-              Press
-            </a>
-            <a href="#" className="">
-              Lead
-            </a>
-            <a href="#" className="">
-              Value
-            </a>
+            {links.map((el) => (
+              <a href="#">{el}</a>
+            ))}
           </div>
           <div
             style={{
@@ -63,24 +58,9 @@ const Footer = () => {
               flexDirection: "column",
             }}
           >
-            <a href="#" className="">
-              Privacy
-            </a>
-            <a href="#" className="">
-              Terms
-            </a>
-            <a href="#" className="">
-              FAQs
-            </a>
-            <a href="#" className="">
-              Security
-            </a>
-            <a href="#" className="">
-              Mobile
-            </a>
-            <a href="#" className="">
-              Contact
-            </a>
+            {linkB.map((el) => (
+              <a href="#">{el}</a>
+            ))}
           </div>
           <div
             style={{
@@ -88,24 +68,9 @@ const Footer = () => {
               flexDirection: "column",
             }}
           >
-            <a href="#" className="">
-              Partner
-            </a>
-            <a href="#" className="">
-              Franchise
-            </a>
-            <a href="addproduct" className="">
-              Seller
-            </a>
-            <a href="warehouse" className="">
-              Warehouse
-            </a>
-            <a href="#" className="">
-              Deliver
-            </a>
-            <a href="#" className="">
-              Resources
-            </a>
+            {linkC.map((el) => (
+              <a href={el.href}>{el.title}</a>
+            ))}
           </div>
         </div>
       </div>

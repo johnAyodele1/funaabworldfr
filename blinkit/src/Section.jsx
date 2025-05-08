@@ -5,7 +5,7 @@ const Section = (props) => {
   const data = props.data;
   const fetchedData = data.data?.product;
   const secData = fetchedData?.filter((el) => el.category == props.category);
-  console.log(secData);
+
   return (
     <div>
       {secData?.length > 0 ? (
@@ -48,7 +48,7 @@ const Section = (props) => {
                 <div className={styles.mainDiv}>
                   {secData?.map((product) => {
                     let time = Math.floor(Math.random() * 58) + 1;
-                    console.log(product.id);
+
                     // random number between 1-14
                     const image = `http://127.0.0.1:3000/uploads/${product.image}`;
                     return (

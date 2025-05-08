@@ -1,0 +1,16 @@
+export const category = [
+  "Choose a category",
+  "Oil & More",
+  "Fruits & Vegetables",
+  "Cleaning & Essentials",
+  "Personal & Care",
+  "Sauces & Spreads",
+  "Snacks & Munchies",
+  "Tea & Coffee",
+  "Chicken & Meat",
+  "Drinks & Juices",
+  "Dairy & Breads",
+  "Home & Offices",
+  "Organic & Instant",
+  "Bakery & Biscuits",
+];

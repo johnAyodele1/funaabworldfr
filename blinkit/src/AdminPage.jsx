@@ -2,86 +2,35 @@ import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { useNavigate } from "react-router";
 import logo from "/logo.png";
+import getProduct from "./store/store";
+import { category } from "../public/categoryName";
 
 const AdminPage = () => {
-  const category = [
-    "Choose a category",
-    "Oil & More",
-    "Fruits & Vegetables",
-    "Cleaning & Essentials",
-    "Personal & Care",
-    "Sauces & Spreads",
-    "Snacks & Munchies",
-    "Tea & Coffee",
-    "Chicken & Meat",
-    "Drinks & Juices",
-    "Dairy & Breads",
-    "Home & Offices",
-    "Organic & Instant",
-    "Bakery & Biscuits",
-  ];
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
-  const [products, setProducts] = useState([
-    { id: 1, name: "Product A", price: 10.99 },
-    { id: 2, name: "Product B", price: 15.49 },
-    { id: 3, name: "Product C", price: 7.99 },
-  ]);
-  const [fliteredProduct, setFliteredProduct] = useState();
-  const [data, setData] = useState();
+  const { products, loading, error, fetchProduct, deleteProduct } =
+    getProduct();
+
   const [sellers, setSellers] = useState([]);
   useEffect(() => {
-    if (data?.data.product.length > 0) {
-      setProducts(data.data.product);
-      setFliteredProduct(products);
-    }
-  }, [data]);
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
-  useEffect(() => {
-    fetch("http://127.0.0.1:3000/getproducts")
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setData(res);
-      })
-      .catch((err) => swal("Error", err.message, "error"));
-  }, []);
+    fetchProduct();
+  }, [fetchProduct]);
+  const product = products?.data?.product;
 
   // useEffect(() => {
-  //   if (user.user.role !== "admin") {
+  //   if (user?.user?.role !== "admin") {
   //     swal("Error", "You don't have access to the page", "error");
   //     navigate("/");
   //   }
   // }, []);
-  const handleCategory = (e) => {
-    const { value } = e.target;
-    setFliteredProduct(products?.filter((el) => el.category === value));
-    console.log(fliteredProduct);
-  };
 
   const handleDeleteProduct = (id) => {
     console.log(id);
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      fetch("http://127.0.0.1:3000/deleteproduct", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-      }).finally((res) => {
-        console.log(res);
-        console.log(JSON.stringify(id));
-        setProducts(products.filter((product) => product.id !== id));
-      });
-    }
+    deleteProduct(id);
   };
 
   // Populate sellers from products, assuming each product has a seller object
   useEffect(() => {
     const uniqueSellers = [];
-    products.forEach((product) => {
+    product?.forEach((product) => {
       if (
         product.seller &&
         !uniqueSellers.some((s) => s.id === product.seller.id)
@@ -92,7 +41,7 @@ const AdminPage = () => {
     setSellers(uniqueSellers);
   }, [products]);
 
-  console.log(sellers);
+  console.log(sellers, products);
   return (
     <div
       style={{
@@ -134,10 +83,10 @@ const AdminPage = () => {
               padding: ".5rem 1rem",
               backgroundColor: "rgba(153, 153, 153, 0.238)",
             }}
-            onChange={handleCategory}
+            // onChange={handleCategory}
           >
             {category.map((el) => (
-              <option value={el.split("&").join("").split(" ").join("")}>
+              <option key={el} value={el}>
                 {el}
               </option>
             ))}
@@ -156,7 +105,7 @@ const AdminPage = () => {
               </tr>
             </thead>
             <tbody>
-              {fliteredProduct?.map((product) => (
+              {product?.map((product) => (
                 <tr key={product.id} style={{ borderBottom: "1px solid #eee" }}>
                   <td style={{ padding: "8px" }}>{product.id}</td>
                   <td style={{ padding: "8px" }}>{product.name}</td>
