@@ -110,7 +110,7 @@ export default function AddProduct() {
       data.append("image", formData.image);
     }
 
-    fetch("http://127.0.0.1:3000/createproduct", {
+    fetch("https://funaabworld-production-64e9.up.railway.app/createproduct", {
       method: "POST",
       body: data,
     })

@@ -9,7 +9,7 @@ const SellerPage = () => {
 
   useEffect(() => {
     if (!user) return;
-    fetch("http://127.0.0.1:3000/getproducts")
+    fetch("https://funaabworld-production-64e9.up.railway.app/getproducts")
       .then((res) => res.json())
       .then((res) => {
         // Filter products by seller ID
@@ -26,7 +26,7 @@ const SellerPage = () => {
   };
 
   const handleDelete = (id) => {
-    fetch("http://127.0.0.1:3000/deleteproduct", {
+    fetch("https://funaabworld-production-64e9.up.railway.app/deleteproduct", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const SellerPage = () => {
             const sales = Math.floor(Math.random() * 1000);
             const revenue = sales * parseFloat(product.price);
             const time = Math.floor(Math.random() * 51) + 10;
-            const imageUrl = `http://127.0.0.1:3000/uploads/${product.image}`;
+            const imageUrl = `https://funaabworld-production-64e9.up.railway.app/uploads/${product.image}`;
             return (
               <div key={product._id} style={{ position: "relative" }}>
                 <Product

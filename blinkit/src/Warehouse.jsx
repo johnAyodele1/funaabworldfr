@@ -52,13 +52,16 @@ const Warehouse = () => {
   };
   const consoleForm = (e) => {
     e.preventDefault();
-    fetch("http://127.0.0.1:3000/employee/createprofile", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+    fetch(
+      "https://funaabworld-production-64e9.up.railway.app/employee/createprofile",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         if (res.status === "success") {

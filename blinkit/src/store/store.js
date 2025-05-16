@@ -8,9 +8,9 @@ const productStore = create((set, get) => ({
   fetchProduct: async () => {
     set({ loading: true });
     try {
-      const response = await fetch("http://127.0.0.1:3000/getproducts").then(
-        (res) => res.json()
-      );
+      const response = await fetch(
+        "https://funaabworld-production-64e9.up.railway.app/getproducts"
+      ).then((res) => res.json());
       console.log(response);
       set({ products: response, loading: false });
     } catch (err) {
@@ -25,13 +25,16 @@ const productStore = create((set, get) => ({
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
         // Perform the API delete operation
-        const response = await fetch("http://127.0.0.1:3000/deleteproduct", {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id }),
-        });
+        const response = await fetch(
+          "https://funaabworld-production-64e9.up.railway.app/deleteproduct",
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id }),
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to delete product");

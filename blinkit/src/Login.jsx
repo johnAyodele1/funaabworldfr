@@ -11,7 +11,7 @@ const Form = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ email, password });
-    fetch("http://127.0.0.1:3000/users/login", {
+    fetch("https://funaabworld-production-64e9.up.railway.app/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -184,13 +184,15 @@ const StyledWrapper = styled.div`
     padding: 30px;
     width: 450px;
     border-radius: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+      Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
 
   ::placeholder {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+      Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
 
   .form button {

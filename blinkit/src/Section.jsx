@@ -50,7 +50,7 @@ const Section = (props) => {
                     let time = Math.floor(Math.random() * 58) + 1;
 
                     // random number between 1-14
-                    const image = `http://127.0.0.1:3000/uploads/${product.image}`;
+                    const image = `https://funaabworld-production-64e9.up.railway.app/uploads/${product.image}`;
                     return (
                       <Product
                         key={product.id}

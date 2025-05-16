@@ -7,7 +7,7 @@ import section from "../public/categories";
 const ProductSec = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/getproducts")
+    fetch("https://funaabworld-production-64e9.up.railway.app/getproducts")
       .then((res) => res.json())
       .then((res) => {
         setData(res);

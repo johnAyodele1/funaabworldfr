@@ -13,7 +13,7 @@ const ProductPage = () => {
   const { id } = useParams();
   const [data, setData] = useState();
   useEffect(() => {
-    fetch(`http://127.0.0.1:3000/product/${id}`)
+    fetch(`https://funaabworld-production-64e9.up.railway.app/product/${id}`)
       .then((res) => res.json())
       .then((res) => {
         if (res.status !== "success") {
@@ -24,7 +24,7 @@ const ProductPage = () => {
       });
   }, []);
   const product = data?.data.product;
-  const image = `http://127.0.0.1:3000/uploads/${product?.image}`;
+  const image = `https://funaabworld-production-64e9.up.railway.app/uploads/${product?.image}`;
   return (
     <div>
       <Navbar />
